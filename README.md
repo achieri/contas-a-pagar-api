@@ -236,10 +236,15 @@ Verifica que todas as 10 contas são criadas sem duplicação ou perda. O `gen_r
 
 ### Testes de carga com k6 (carga real)
 
-Para simular dezenas de usuários simultâneos em cenário real, instale o [cmd](winget install k6 --source winget) e use o script de exemplo em `testes/concorrencia/CONCORRENCIA.md`:
+Para simular dezenas de usuários simultâneos, instale o k6 e rode o script pronto:
 
 ```bash
-# Exemplo: 50 usuários virtuais tentando alterar a mesma conta por 10s
+# Instalar k6
+winget install k6 --source winget   # Windows
+brew install k6                     # macOS
+# Linux: https://grafana.com/docs/k6/latest/set-up/install-k6/
+
+# Rodar: 50 usuários virtuais tentando alterar a mesma conta por 10s
 k6 run testes/concorrencia/k6_race_condition.js
 ```
 
