@@ -1,0 +1,4 @@
+data_vencimento,data_pagamento,valor,descricao,fornecedor_id
+2025-09-01,,500.00,Linha com apenas 4 colunas
+2025-09-10
+2025-09-15,,200.00,Linha valida,586443e5-446b-4a0e-88a3-0e6393a550be

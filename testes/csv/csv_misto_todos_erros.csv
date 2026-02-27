@@ -1,0 +1,8 @@
+data_vencimento,data_pagamento,valor,descricao,fornecedor_id
+31/12/2025,,100.00,Data formato errado,586443e5-446b-4a0e-88a3-0e6393a550be
+2025-09-05,,-50.00,Valor negativo,586443e5-446b-4a0e-88a3-0e6393a550be
+2025-09-10,,0,Valor zero,586443e5-446b-4a0e-88a3-0e6393a550be
+2025-09-15,,abc,Valor nao numerico,586443e5-446b-4a0e-88a3-0e6393a550be
+2025-09-20,,200.00,Fornecedor inexistente,00000000-0000-0000-0000-000000000000
+2025-09-25,,300.00,Coluna fornecedor_id ausente
+2025-10-01,,450.00,Linha 100% valida — deve ser importada,586443e5-446b-4a0e-88a3-0e6393a550be

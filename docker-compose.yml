@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: contas-pagar-postgres
+    environment:
+      POSTGRES_DB: contas_pagar
+      POSTGRES_USER: contas_user
+      POSTGRES_PASSWORD: contas_pass
+    ports:
+      - "4022:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U contas_user -d contas_pagar"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  rabbitmq:
+    image: rabbitmq:3.13-management-alpine
+    container_name: contas-pagar-rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "4023:5672"
+      - "4024:15672"
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: contas-pagar-api
+    ports:
+      - "4021:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/contas_pagar
+      SPRING_DATASOURCE_USERNAME: contas_user
+      SPRING_DATASOURCE_PASSWORD: contas_pass
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+      JWT_SECRET: 3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b
+      JWT_EXPIRATION_MS: 86400000
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

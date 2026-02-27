@@ -1,0 +1,6 @@
+data_vencimento,data_pagamento,valor,descricao,fornecedor_id
+31/12/2025,,100.00,Linha com data no formato errado (dd/MM/yyyy),586443e5-446b-4a0e-88a3-0e6393a550be
+data-invalida,,200.00,Linha com texto no lugar de data,586443e5-446b-4a0e-88a3-0e6393a550be
+2025-13-01,,300.00,Linha com mes 13 (inexistente),586443e5-446b-4a0e-88a3-0e6393a550be
+2025-02-30,,150.00,Linha com dia 30 em fevereiro,586443e5-446b-4a0e-88a3-0e6393a550be
+2025-09-01,,500.00,Linha valida no meio das invalidas,586443e5-446b-4a0e-88a3-0e6393a550be

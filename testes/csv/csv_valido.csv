@@ -1,0 +1,7 @@
+data_vencimento,data_pagamento,valor,descricao,fornecedor_id
+2025-09-01,,450.00,Energia eletrica agosto,586443e5-446b-4a0e-88a3-0e6393a550be
+2025-09-15,2025-09-10,180.00,Internet setembro,586443e5-446b-4a0e-88a3-0e6393a550be
+2025-10-01,,95.50,Agua e esgoto,586443e5-446b-4a0e-88a3-0e6393a550be
+2025-10-20,,1200.00,Aluguel comercial,586443e5-446b-4a0e-88a3-0e6393a550be
+2025-11-01,,320.75,Manutencao predial,586443e5-446b-4a0e-88a3-0e6393a550be
+2025-11-15,,010.00,Zero a esquerda aceito no CSV (equivale a 10.00),586443e5-446b-4a0e-88a3-0e6393a550be
