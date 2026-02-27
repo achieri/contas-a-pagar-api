@@ -236,7 +236,7 @@ Verifica que todas as 10 contas são criadas sem duplicação ou perda. O `gen_r
 
 ### Testes de carga com k6 (carga real)
 
-Para simular dezenas de usuários simultâneos em cenário real, instale o [k6](https://k6.io/docs/getting-started/installation/) e use o script de exemplo em `testes/concorrencia/CONCORRENCIA.md`:
+Para simular dezenas de usuários simultâneos em cenário real, instale o [cmd](winget install k6 --source winget) e use o script de exemplo em `testes/concorrencia/CONCORRENCIA.md`:
 
 ```bash
 # Exemplo: 50 usuários virtuais tentando alterar a mesma conta por 10s
@@ -382,3 +382,9 @@ erDiagram
 | `conta` | `idx_conta_fornecedor` | B-tree | JOINs com fornecedor |
 | `usuario` | `idx_usuario_username` | B-tree UNIQUE | Autenticação e unicidade de username |
 | `importacao_log` | `idx_importacao_log_protocolo` | B-tree | Consulta de status por protocolo |
+
+
+### Facilicade para pesquisar no banco
+docker exec contas-pagar-postgres psql -U contas_user -d contas_pagar -c "SELECT * from usuaro;"  
+docker exec contas-pagar-postgres psql -U contas_user -d contas_pagar -c "SELECT * from fornecedor;"  
+docker exec contas-pagar-postgres psql -U contas_user -d contas_pagar -c "SELECT * from conta;" 
