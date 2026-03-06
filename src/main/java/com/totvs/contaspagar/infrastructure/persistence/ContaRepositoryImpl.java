@@ -49,6 +49,11 @@ public class ContaRepositoryImpl implements ContaRepository {
     }
 
     @Override
+    public boolean existeContaComFornecedor(UUID fornecedorId) {
+        return jpaRepository.existsByFornecedorId(fornecedorId);
+    }
+
+    @Override
     public void deletar(UUID id) {
         jpaRepository.deleteById(id);
     }

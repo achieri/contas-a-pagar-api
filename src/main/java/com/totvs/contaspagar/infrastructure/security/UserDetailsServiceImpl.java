@@ -1,6 +1,7 @@
 package com.totvs.contaspagar.infrastructure.security;
 
-import com.totvs.contaspagar.infrastructure.security.entity.UsuarioRepository;
+import com.totvs.contaspagar.domain.model.Usuario;
+import com.totvs.contaspagar.domain.repository.UsuarioRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        var usuario = usuarioRepository.findByUsername(username)
+        var usuario = usuarioRepository.buscarPorUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado: " + username));
 
         return new User(

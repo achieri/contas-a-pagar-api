@@ -51,6 +51,8 @@ public interface ContaJpaRepository extends JpaRepository<Conta, UUID> {
     /**
      * Relatório: soma o valor de contas PAGAS no período informado.
      */
+    boolean existsByFornecedorId(UUID fornecedorId);
+
     @Query("""
             SELECT COALESCE(SUM(c.valor), 0) FROM Conta c
             WHERE c.situacao = :situacao

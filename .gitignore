@@ -54,3 +54,21 @@ replay_pid*
 # Maven wrapper (se não for usar)
 # ============================================================
 .mvn/wrapper/maven-wrapper.jar
+
+# ============================================================
+# Secrets e credenciais (NUNCA commitar)
+# ============================================================
+.env
+.env.local
+.env.development
+.env.production
+.env.*.local
+*.secret.yaml
+*-secrets.yaml
+*.pem
+*.key
+*.p12
+*.jks
+application-secrets.yml
+application-prod.yml
+credentials.json
