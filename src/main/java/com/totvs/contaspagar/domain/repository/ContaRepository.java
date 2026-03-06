@@ -21,5 +21,6 @@ public interface ContaRepository {
                                   String descricao,
                                   Pageable pageable);
     BigDecimal calcularTotalPagoPorPeriodo(LocalDate inicio, LocalDate fim);
+    boolean existeContaComFornecedor(UUID fornecedorId);
     void deletar(UUID id);
 }

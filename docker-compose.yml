@@ -27,6 +27,8 @@ services:
     ports:
       - "4023:5672"
       - "4024:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
     healthcheck:
       test: ["CMD", "rabbitmq-diagnostics", "ping"]
       interval: 10s
@@ -48,7 +50,7 @@ services:
       SPRING_RABBITMQ_PORT: 5672
       SPRING_RABBITMQ_USERNAME: guest
       SPRING_RABBITMQ_PASSWORD: guest
-      JWT_SECRET: 3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b
+      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET nao definido. Defina no ambiente ou em arquivo .env}
       JWT_EXPIRATION_MS: 86400000
     depends_on:
       postgres:
@@ -58,3 +60,4 @@ services:
 
 volumes:
   postgres_data:
+  rabbitmq_data:

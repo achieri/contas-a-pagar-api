@@ -104,7 +104,11 @@ public class Conta {
         }
         this.situacao = novaSituacao;
         if (novaSituacao == SituacaoConta.PAGO) {
-            this.dataPagamento = (dataPagamento != null) ? dataPagamento : LocalDate.now();
+            LocalDate hoje = LocalDate.now();
+            if (dataPagamento != null && dataPagamento.isAfter(hoje)) {
+                throw new DomainException("Data de pagamento não pode ser no futuro. Informada: " + dataPagamento);
+            }
+            this.dataPagamento = (dataPagamento != null) ? dataPagamento : hoje;
         }
         this.atualizadoEm = LocalDateTime.now();
     }

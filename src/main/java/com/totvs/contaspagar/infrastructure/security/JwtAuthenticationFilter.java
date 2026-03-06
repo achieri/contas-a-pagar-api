@@ -5,25 +5,23 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.List;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtTokenProvider tokenProvider;
-    private final UserDetailsService userDetailsService;
 
-    public JwtAuthenticationFilter(JwtTokenProvider tokenProvider,
-                                    UserDetailsService userDetailsService) {
+    public JwtAuthenticationFilter(JwtTokenProvider tokenProvider) {
         this.tokenProvider = tokenProvider;
-        this.userDetailsService = userDetailsService;
     }
 
     @Override
@@ -35,9 +33,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         extrairToken(request).ifPresent(token -> {
             if (tokenProvider.validarToken(token)) {
                 var username = tokenProvider.extrairUsername(token);
-                var userDetails = userDetailsService.loadUserByUsername(username);
-                var auth = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities());
+                var role = tokenProvider.extrairRole(token);
+                var authorities = List.of(new SimpleGrantedAuthority(role != null ? role : "ROLE_USER"));
+                var auth = new UsernamePasswordAuthenticationToken(username, null, authorities);
                 auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(auth);
             }
