@@ -2,6 +2,7 @@ package com.totvs.contaspagar.api.controller;
 
 import com.totvs.contaspagar.application.dto.response.ImportacaoProtocoloResponse;
 import com.totvs.contaspagar.infrastructure.csv.CsvParser;
+import com.totvs.contaspagar.infrastructure.csv.CsvParser.ResultadoParsing;
 import com.totvs.contaspagar.infrastructure.messaging.CsvImportMessage;
 import com.totvs.contaspagar.infrastructure.messaging.CsvImportPublisher;
 import com.totvs.contaspagar.infrastructure.persistence.entity.ImportacaoLog;
@@ -85,7 +86,7 @@ public class ImportacaoController {
         var csvContent = new String(arquivo.getBytes(), StandardCharsets.UTF_8);
 
         // Valida conteúdo antes de enfileirar
-        var resultado = csvParser.parsear(csvContent);
+        ResultadoParsing resultado = csvParser.parsear(csvContent);
         if (resultado.linhasValidas().isEmpty() && resultado.erros().isEmpty()) {
             var pd = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
             pd.setTitle("Arquivo sem dados");

@@ -1,6 +1,5 @@
 package com.totvs.contaspagar.infrastructure.messaging;
 
-import com.totvs.contaspagar.infrastructure.persistence.entity.ImportacaoLog;
 import com.totvs.contaspagar.infrastructure.persistence.jpa.ImportacaoLogJpaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
